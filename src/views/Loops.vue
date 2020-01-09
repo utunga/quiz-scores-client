@@ -257,7 +257,7 @@ export default {
     userDropdown() {
       return {
         options: _.map(this.users,
-          (val, index) => {
+          (val) => {
             return { value: val.name }
           }),
         placeholder: this.currentUser,

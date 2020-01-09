@@ -42,6 +42,6 @@
     "@vue/cli-plugin-eslint": "^3.0.3",
     "@vue/cli-plugin-unit-jest": "^3.0.3",
     "@vue/eslint-config-prettier": "^3.0.3",
-    "@vue/test-utils": "^1.0.0-beta.20",
+    "@vue/test-utils": "^1.0.0-beta.20"
   }
 }

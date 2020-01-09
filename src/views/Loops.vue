@@ -164,15 +164,12 @@
   </div>
 </template>
 <style scoped>
-
-div >>> .user_chooser .dropdown-label-container .dropdown-label  .text
-{
-  font-size: .8em !important;    
+div >>> .user_chooser .dropdown-label-container .dropdown-label .text {
+  font-size: 0.8em !important;
 }
 
-div >>> .user_chooser .options .option
-{
-  font-size: .8em !important;    
+div >>> .user_chooser .options .option {
+  font-size: 0.8em !important;
 }
 </style>
 
@@ -214,8 +211,7 @@ export default {
   mixins: [LoopsMixin, UsersMixin],
   components: {
     "vue-confirmation-button": vueConfirmationButton,
-    "vue-dropdown": vueDynamicDropdown,
-    
+    "vue-dropdown": vueDynamicDropdown
   },
   mounted() {
     // handle routing
@@ -241,14 +237,14 @@ export default {
       currentUser: "Linc", // or "miles"
       proposeFor: "Linc", // or "miles"
       currentWeek: 1,
-      users : [
+      users: [
         { name: "Linc" },
         { name: "Barnaby" },
         { name: "Milan" },
         { name: "Miles" },
         { name: "Sergio" }
       ]
-    }
+    };
   },
   computed: {
     loops() {
@@ -256,10 +252,9 @@ export default {
     },
     userDropdown() {
       return {
-        options: _.map(this.users,
-          (val) => {
-            return { value: val.name }
-          }),
+        options: _.map(this.users, val => {
+          return { value: val.name };
+        }),
         placeholder: this.currentUser,
         prefix: "Current User:",
         backgroundColor: "white",

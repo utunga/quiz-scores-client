@@ -19,21 +19,16 @@
             @keyup.enter="addLoop"
           />
           <div class="radios">
-            For :
-            <input
-              type="radio"
-              name="proposeFor"
-              value="linc"
-              id="user-11"
-              v-model="proposeFor"
-            /><label for="user-11"> Linc </label>
-            <input
-              type="radio"
-              name="proposeFor"
-              value="miles"
-              id="user-22"
-              v-model="proposeFor"
-            /><label for="user-22"> Miles </label>
+            For:
+            <select v-model="proposeFor">
+              <option v-for="user in users" v-bind:value="user.name">
+                {{ user.name }}
+              </option>
+            </select>
+          </div>
+          <div class="confidence">
+            Estimate of success:
+            <vue-slider v-model="estimate" min="0" max="100"></vue-slider>
           </div>
         </div>
       </header>
@@ -62,26 +57,26 @@
                 >{{ loop.title }}
                 <div class="loop_details">
                   <div class="for">For: {{ loop.for }}</div>
-                  <div class="week">Opened in week: {{ loop.week }}</div>
+                  <div class="week">Estimate : {{ loop.estimate }}</div>
                   <div class="week">Status : {{ loop.status }}</div>
                 </div>
               </label>
               <button
                 class="accept"
                 title="Commit to doing this?"
-                v-if="loop.status === 'proposed'"
+                v-if="loop.status === 'proposed' && loop.for === currentUser" 
                 @click="acceptLoop(loop)"
               ></button>
               <button
                 class="succeed"
                 title="Mark your success!"
-                v-if="loop.status === 'open'"
+                v-if="loop.status === 'open' && loop.for === currentUser"
                 @click="succeedLoop(loop)"
               ></button>
               <button
                 class="cancel"
                 title="Abandon this one"
-                v-if="!loop.completed"
+                v-if="!loop.completed && loop.for === currentUser"
                 @click="cancelLoop(loop)"
               ></button>
 
@@ -236,6 +231,7 @@ export default {
       visibility: "all",
       currentUser: "Linc", // or "miles"
       proposeFor: "Linc", // or "miles"
+      estimate: 50,
       currentWeek: 1,
       users: [
         { name: "Linc" },
@@ -307,7 +303,8 @@ export default {
         completed: false,
         week: this.currentWeek,
         createdBy: this.currentUser,
-        for: this.proposeFor
+        for: this.proposeFor,
+        estimate: (this.estimate)/100
       });
       loop.save({});
       this.visibility = "all";

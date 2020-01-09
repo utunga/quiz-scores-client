@@ -3,7 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "@/store/index";
 import "./registerServiceWorker";
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
 
+Vue.component('VueSlider', VueSlider)
 Vue.config.productionTip = false;
 
 console.log(store);

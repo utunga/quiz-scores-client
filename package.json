@@ -1,6 +1,6 @@
 {
-  "name": "ooodaloops-client",
-  "description": "Vue, feathers and feathers-vuex OOODA Loops client",
+  "name": "faction-claims-client",
+  "description": "Vue, feathers and feathers Faction Claims client",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -27,7 +27,8 @@
     "vue-confirmation-button": "^1.0.1",
     "vue-dynamic-dropdown": "^1.0.12",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "@vue/cli-service": "^3.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
@@ -35,7 +36,6 @@
     "@vue/cli-plugin-eslint": "^3.0.3",
     "@vue/cli-plugin-pwa": "^3.0.3",
     "@vue/cli-plugin-unit-jest": "^3.0.3",
-    "@vue/cli-service": "^3.0.3",
     "@vue/eslint-config-prettier": "^3.0.3",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",

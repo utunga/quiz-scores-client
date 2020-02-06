@@ -7,6 +7,6 @@ export default {
   //   ? process.env.VUE_APP_API_URL
   domain: !isDev ? "*.herokuapp.com" : "localhost",
   connection: !isDev
-    ? "https://faction-claims-api.herokuapp.com"
+    ? "https://quiz-scores-api.herokuapp.com"
     : "http://localhost:3030"
 };

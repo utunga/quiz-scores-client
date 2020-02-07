@@ -2,17 +2,9 @@ import feathersVuex from "feathers-vuex";
 import feathersClient from "@/feathers";
 
 const { service } = feathersVuex(feathersClient, { idField: "_id" });
-const servicePath = "users";
+const servicePath = "polls";
 
 const servicePlugin = service(servicePath, {
-  instanceDefaults: {
-    // email: "",
-    // firstName: "",
-    // lastName: "",
-    // get displayName() {
-    //   return `${this.firstName} ${this.lastName}`;
-    // }
-  }
 });
 
 feathersClient.service(servicePath).hooks({
@@ -46,4 +38,4 @@ feathersClient.service(servicePath).hooks({
 
 export default servicePlugin;
 
-console.log("users service loaded");
+console.log("polls service loaded");

@@ -41,7 +41,7 @@ body {
 	display: none;
 }
 
-.loopapp {
+.pollapp {
 	background: #fff;
 	margin: 300px 0 40px 0;
 	position: relative;
@@ -49,7 +49,7 @@ body {
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-.loopapp {
+.pollapp {
 	h1 {
 		position: absolute;
 		top: -380px;
@@ -60,63 +60,28 @@ body {
 		color: rgba(43, 35, 9, 0.932);
 		-webkit-text-rendering: optimizeLegibility;
 		-moz-text-rendering: optimizeLegibility;
-		text-rendering: optimizeLegibility;
-		
-	}
-
-	h1 #faction_logo {
-		background-image: url(../assets/header.png);
-		width: 100%;
-		height: 250px;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-color: white;
-		color: transparent;
-
-	}
-
-	.user_chooser {
-		position: absolute;
-		top: -46px;
-		width: 99.9%;
-		z-index: 100;
-	}
-	.filter_user_chooser {
-		position: absolute;
-		top: -40px;
-		left: 240px;
-		width: 100%;
-		.radios {
-			display: inline-block;
-		}
-	}
-	.current_week {
-		position: absolute;
-		top: -40px;
-		left: 490px;
-		width: 100%;
+		text-rendering: optimizeLegibility;	
 	}
 }
 
-.loopapp input::-webkit-input-placeholder {
+.pollapp input::-webkit-input-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: #e6e6e6;
 }
 
-.loopapp input::-moz-placeholder {
+.pollapp input::-moz-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: #e6e6e6;
 }
 
-.loopapp input::input-placeholder {
+.pollapp input::input-placeholder {
 	font-style: italic;
 	font-weight: 300;
 	color: #e6e6e6;
 }
 
-.commitment,
 .edit {
 	position: relative;
 	margin: 0;
@@ -135,7 +100,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.new-loop {
+.new-poll {
 	padding: 16px 16px 16px 60px;
 	border: none;
 	background: rgba(0, 0, 0, 0.003);
@@ -173,39 +138,39 @@ label[for='toggle-all'] {
 	color: #737373;
 }
 
-.loop-list {
+.poll-list {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.loop-list li {
+.poll-list li {
 	position: relative;
 	font-size: 24px;
 	border-bottom: 1px solid #ededed;
 }
 
-.loop-list li:last-child {
+.poll-list li:last-child {
 	border-bottom: none;
 }
 
-.loop-list li.editing {
+.poll-list li.editing {
 	border-bottom: none;
 	padding: 0;
 }
 
-.loop-list li.editing .edit {
+.poll-list li.editing .edit {
 	display: block;
 	width: 506px;
 	padding: 12px 16px;
 	margin: 0 0 0 43px;
 }
 
-.loop-list li.editing .view {
+.poll-list li.editing .view {
 	display: none;
 }
 
-.loop-list li .view {
+.poll-list li .view {
 
 	.fail_tick,
 	.success_tick {
@@ -228,7 +193,7 @@ label[for='toggle-all'] {
 	
 }
 
-.loop-list li .toggle {
+.poll-list li .toggle {
 	text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -243,15 +208,15 @@ label[for='toggle-all'] {
 }
 
 
-.loop-list li input.toggle:after {
+.poll-list li input.toggle:after {
 	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
 }
 
-.loop-list li input.toggle:checked:after {
+.poll-list li input.toggle:checked:after {
 	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
 }
 
-.loop-list li label {
+.poll-list li label {
 	word-break: none;
 	padding: 15px 60px 15px 15px;
 	margin-left: 45px;
@@ -261,7 +226,7 @@ label[for='toggle-all'] {
 	font-weight: 400;
 	transition: color 0.4s;
 
-	.loop_details {
+	.poll_details {
 		font-size: 0.9rem;
 		margin-top: 10px;
 		div {
@@ -272,32 +237,32 @@ label[for='toggle-all'] {
 	}
 }
 
-.loop-list li.completed.success label {
+.poll-list li.completed.success label {
 	color: #092917;
 	background-color: #4ca775;
 }
 
-.loop-list li.completed.fail label {
+.poll-list li.completed.fail label {
 	color: #111104;
 	background-color: #a1a74c;
 }
 
-.loop-list li .accept,
-.loop-list li .cancel,
-.loop-list li .succeed {
+.poll-list li .accept,
+.poll-list li .cancel,
+.poll-list li .succeed {
 	display: none;
 }
 
-.loop-list li:hover .accept,
-.loop-list li:hover .cancel,
-.loop-list li:hover .succeed {
+.poll-list li:hover .accept,
+.poll-list li:hover .cancel,
+.poll-list li:hover .succeed {
 	display: block;
 }
 
-.loop-list li .accept,
-.loop-list li .cancel,
-.loop-list li .succeed,
-.loop-list li .remove
+.poll-list li .accept,
+.poll-list li .cancel,
+.poll-list li .succeed,
+.poll-list li .remove
 {
 	position: absolute;
 	top: 0;
@@ -314,21 +279,21 @@ label[for='toggle-all'] {
 		color: #af5b5e;
 	}
 }
-.loop-list li .cancel {
+.poll-list li .cancel {
 	right: 10px;
 	&:after {
 		content: '❌';
 	}
 }
 
-.loop-list li .accept {
+.poll-list li .accept {
 	right: 60px;
 	&:after {
 		content: '👍';
 	}
 }
 
-.loop-list li .succeed {
+.poll-list li .succeed {
 	right: 60px;
 	&:after {
 		content: '✓';
@@ -336,11 +301,11 @@ label[for='toggle-all'] {
 }
 
 
-.loop-list li .edit {
+.poll-list li .edit {
 	display: none;
 }
 
-.loop-list li.editing:last-child {
+.poll-list li.editing:last-child {
 	margin-bottom: -1px;
 }
 
@@ -367,12 +332,12 @@ label[for='toggle-all'] {
 	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
 
-.loop-count {
+.poll-count {
 	float: left;
 	text-align: left;
 }
 
-.loop-count strong {
+.poll-count strong {
 	font-weight: 300;
 }
 
@@ -447,11 +412,11 @@ html .clear-completed:active {
 */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.toggle-all,
-	.loop-list li .toggle {
+	.poll-list li .toggle {
 		background: none;
 	}
 
-	.loop-list li .toggle {
+	.poll-list li .toggle {
 		height: 40px;
 	}
 

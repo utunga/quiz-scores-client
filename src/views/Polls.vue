@@ -2,7 +2,7 @@
   <div class="polls">
     <section class="pollapp">
       <header class="header">
-        <h1><div id="faction_logo">Polls</div></h1>
+        <h1>Quiz Scores</h1>
     
         <div class="new-poll">
           <input
@@ -25,11 +25,24 @@
             class="poll"
             :key="poll.id"
             :class="{
-              editing: poll == editingPoll
+              editing: poll.date == editingDate
             }"
           >
             <div class="view">
-
+              <p>Date: {{ poll.date }}</p>
+              <p>Score: 
+                {{ poll.score }} /
+                {{ poll.out_of }} </p>
+              <p>Present:
+                <ul>
+                  <li
+                      v-for="user_id in poll.present">
+                      {{ user_id }}
+                  </li>
+                </ul>
+     
+              </p>
+                
               <!-- <vue-confirmation-button
                 class="remove-confirm"
                 title="Remove from record"
@@ -48,7 +61,7 @@
               @keyup.esc="cancelEdit(poll)"
             />
 
-<!--             v-poll-focus="poll == editingPoll" -->
+<!--             v-poll-focus="poll == editingDate" -->
           </li>
         </ul>
       </section>
@@ -118,7 +131,7 @@ export default {
   data() {
     return {
       nextDate: this.currDay,
-      editingPoll: null,
+      editingDate: null,
       currScore: null
     };  
   },
@@ -191,13 +204,13 @@ export default {
     },
     editPoll(poll) {
       this.beforeEditCache = poll;
-      this.editingPoll = poll;
+      this.editingDate = poll;
     },
     doneEdit(poll) {
-      if (!this.editingPoll) {
+      if (!this.editingDate) {
         return;
       }
-      this.editingPoll = null;
+      this.editingDate = null;
       poll.title = poll.title.trim();
 
       poll.save({});
@@ -207,7 +220,7 @@ export default {
       }
     },
     cancelEdit(poll) {
-      this.editingPoll = null;
+      this.editingDate = null;
       poll.title = this.beforeEditCache;
     },
     setScore(selectedOption) {

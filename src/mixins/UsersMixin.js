@@ -18,15 +18,13 @@ export default {
     })
   },
   async created() {
-    console.log("usersMixin was loaded");
-
+   
     feathersClient.service("users").on("created", data => {
       console.log(`User created - ${data.title}`);
     });
 
     try {
       await this.findUsers({});
-      console.log("found Users");
     } catch (e) {
       console.error(e);
     }

@@ -5,92 +5,27 @@
         <h1>Quiz Scores</h1>
     
         <div class="new-poll">
-          <input
-            autofocus
-            autocomplete="off"
-            v-model="nextDate"
-            @keyup.enter="addPoll"
-          />
-          <vue-dropdown 
-            :config="scoreDropdown"
-            @setSelectedOption="setScore($event);"
-            class="score_chooser"
-            ></vue-dropdown>
+        
         </div>
       </header>
       <section class="main" v-show="polls.length" v-cloak>
-        <ul class="poll-list">
-          <li
-            v-for="poll in filteredPolls"
-            class="poll"
-            :key="poll.id"
-            :class="{
-              editing: poll.date == editingDate
-            }"
-          >
-            <div class="view">
-              <p>Date: {{ poll.date }}</p>
-              <p>Score: 
-                {{ poll.score }} /
-                {{ poll.out_of }} </p>
-              <p>Present:
-                <ul>
-                  <li
-                      v-for="user_id in poll.present">
-                      {{ user_id }}
-                  </li>
-                </ul>
-     
-              </p>
-                
-              <!-- <vue-confirmation-button
-                class="remove-confirm"
-                title="Remove from record"
-                v-if="poll.completed" 
-                :messages="['X','Are you sure?','']"
-                v-on:confirmation-success="deletePoll(poll)">
-              </vue-confirmation-button> -->
-            </div>
-            <input
-              class="edit"
-              type="text"
-              v-model="poll.score"
-             
-              @blur="doneEdit(poll)"
-              @keyup.enter="doneEdit(poll)"
-              @keyup.esc="cancelEdit(poll)"
-            />
-
-<!--             v-poll-focus="poll == editingDate" -->
-          </li>
-        </ul>
+        <div class="poll-list">
+          <poll v-for="poll in filteredPolls" :poll="poll"/>
+        </div>
       </section>
       <footer class="footer" v-show="polls.length" v-cloak>
-     
-        
+    
       </footer>
     </section>
-    <footer class="info">
-      <p>Double-click to edit a poll</p>
-
-     
-    </footer>
   </div>
+          
 </template>
 <style scoped>
-div >>> .user_chooser .dropdown-label-container .dropdown-label .text {
-  font-size: 0.8em !important;
-}
-
-div >>> .user_chooser .options .option {
-  font-size: 0.8em !important;
-}
 </style>
 
 <script>
-import vueConfirmationButton from "vue-confirmation-button";
-import vueDynamicDropdown from "vue-dynamic-dropdown";
 import _ from "lodash";
+import vuePoll from "@/views/Poll.vue"
 import PollsMixin from "@/mixins/PollsMixin";
 import UsersMixin from "@/mixins/UsersMixin";
 // visibility filters
@@ -109,8 +44,7 @@ export default {
   name: "Polls",
   mixins: [PollsMixin, UsersMixin],
   components: {
-    "vue-confirmation-button": vueConfirmationButton,
-    "vue-dropdown": vueDynamicDropdown
+    "poll": vuePoll
   },
   mounted() {
     // handle routing
@@ -124,18 +58,18 @@ export default {
         this.visibility = "all";
       }
     };
-
     window.addEventListener("hashchange", onHashChange);
     onHashChange();
   },
   data() {
     return {
-      nextDate: this.currDay,
-      editingDate: null,
-      currScore: null
+
     };  
   },
   computed: {
+    users() {
+      return this.listUsers;
+    },
     polls() {
       return this.listPolls;
     },
@@ -174,7 +108,6 @@ export default {
     },
     filteredPolls() {
       return this.listPolls;
-      //return filters[this.visibility](this.polls, this.currentUser);
     }
   },
   filters: {

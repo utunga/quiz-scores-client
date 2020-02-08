@@ -43,7 +43,7 @@ body {
 
 .pollapp {
 	background: #fff;
-	margin: 300px 0 40px 0;
+	margin: 100px 0 40px 0;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -117,37 +117,14 @@ label[for='toggle-all'] {
 	display: none;
 }
 
-.toggle-all {
-	position: absolute;
-	top: -55px;
-	left: -12px;
-	width: 60px;
-	height: 34px;
-	text-align: center;
-	border: none; /* Mobile Safari */
-}
-
-.toggle-all:before {
-	content: '❯';
-	font-size: 22px;
-	color: #e6e6e6;
-	padding: 10px 27px 10px 27px;
-}
-
-.toggle-all:checked:before {
-	color: #737373;
-}
-
 .poll-list {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-}
 
-.poll-list li {
-	position: relative;
-	font-size: 24px;
-	border-bottom: 1px solid #ededed;
+	.poll {
+		margin: 20px;
+	}
 }
 
 .poll-list li:last-child {
@@ -169,137 +146,6 @@ label[for='toggle-all'] {
 .poll-list li.editing .view {
 	display: none;
 }
-
-.poll-list li .view {
-
-	.fail_tick,
-	.success_tick {
-		position: absolute;
-		top: 20px;
-		left: 10px;
-		width: 40px;
-		height: 40px;
-		margin: auto 0;
-		font-size: 30px;
-		margin-bottom: 11px;
-		transition: color 0.2s ease-out;
-	}
-	.success_tick {
-		color: #069e13;
-	}
-	.fail_tick {
-		color: #9e2406;
-	}
-	
-}
-
-.poll-list li .toggle {
-	text-align: center;
-	width: 40px;
-	/* auto, since non-WebKit browsers doesn't support input styling */
-	height: auto;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	margin: auto 0;
-	border: none; /* Mobile Safari */
-	-webkit-appearance: none;
-	appearance: none;
-}
-
-
-.poll-list li input.toggle:after {
-	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
-}
-
-.poll-list li input.toggle:checked:after {
-	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
-}
-
-.poll-list li label {
-	word-break: none;
-	padding: 15px 60px 15px 15px;
-	margin-left: 45px;
-	display: block;
-	line-height: 1.2;
-	font-size:1.2rem;
-	font-weight: 400;
-	transition: color 0.4s;
-
-	.poll_details {
-		font-size: 0.9rem;
-		margin-top: 10px;
-		div {
-			display: inline-block;
-			margin-left: 20px;
-			font-weight: 300;
-		}
-	}
-}
-
-.poll-list li.completed.success label {
-	color: #092917;
-	background-color: #4ca775;
-}
-
-.poll-list li.completed.fail label {
-	color: #111104;
-	background-color: #a1a74c;
-}
-
-.poll-list li .accept,
-.poll-list li .cancel,
-.poll-list li .succeed {
-	display: none;
-}
-
-.poll-list li:hover .accept,
-.poll-list li:hover .cancel,
-.poll-list li:hover .succeed {
-	display: block;
-}
-
-.poll-list li .accept,
-.poll-list li .cancel,
-.poll-list li .succeed,
-.poll-list li .remove
-{
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 40px;
-	height: 40px;
-	margin: auto 0;
-	font-size: 30px;
-	color: #cc9a9a;
-	margin-bottom: 11px;
-	transition: color 0.2s ease-out;
-
-	&:hover {
-		color: #af5b5e;
-	}
-}
-.poll-list li .cancel {
-	right: 10px;
-	&:after {
-		content: '❌';
-	}
-}
-
-.poll-list li .accept {
-	right: 60px;
-	&:after {
-		content: '👍';
-	}
-}
-
-.poll-list li .succeed {
-	right: 60px;
-	&:after {
-		content: '✓';
-	}
-}
-
 
 .poll-list li .edit {
 	display: none;
@@ -341,70 +187,6 @@ label[for='toggle-all'] {
 	font-weight: 300;
 }
 
-.filters {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: absolute;
-	right: 0;
-	left: 0;
-}
-
-.filters li {
-	display: inline;
-}
-
-.filters li a {
-	color: inherit;
-	margin: 3px;
-	padding: 3px 7px;
-	text-decoration: none;
-	border: 1px solid transparent;
-	border-radius: 3px;
-}
-
-.filters li a:hover {
-	border-color: rgba(175, 47, 47, 0.1);
-}
-
-.filters li a.selected {
-	border-color: rgba(175, 47, 47, 0.2);
-}
-
-.clear-completed,
-html .clear-completed:active {
-	float: right;
-	position: relative;
-	line-height: 20px;
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.clear-completed:hover {
-	text-decoration: underline;
-}
-
-.info {
-	margin: 65px auto 0;
-	color: #bfbfbf;
-	font-size: 10px;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	text-align: center;
-}
-
-.info p {
-	line-height: 1;
-}
-
-.info a {
-	color: inherit;
-	text-decoration: none;
-	font-weight: 400;
-}
-
-.info a:hover {
-	text-decoration: underline;
-}
 
 /*
 	Hack to remove background from Mobile Safari.

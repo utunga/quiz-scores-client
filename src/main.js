@@ -9,7 +9,7 @@ import 'vue-slider-component/theme/default.css'
 Vue.component('VueSlider', VueSlider)
 Vue.config.productionTip = false;
 
-console.log(store);
+//console.log(store);
 
 new Vue({
   router,

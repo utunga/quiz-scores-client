@@ -18,15 +18,13 @@ export default {
     })
   },
   async created() {
-    console.log("PollsMixin was loaded");
-
+    
     feathersClient.service("polls").on("created", data => {
       console.log(`Poll created for - ${data.date}`);
     });
 
     try {
       await this.findPolls({});
-      console.log("found Polls");
     } catch (e) {
       console.error(e);
     }

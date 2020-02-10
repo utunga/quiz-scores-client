@@ -14,11 +14,11 @@ export default {
   },
   methods: {
     ...mapActions("polls", {
-      findPolls: "find"
+      findPolls: "find",
+      createPoll: "create"
     })
   },
   async created() {
-    
     feathersClient.service("polls").on("created", data => {
       console.log(`Poll created for - ${data.date}`);
     });

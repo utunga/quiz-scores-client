@@ -28,11 +28,11 @@ export default {
     computed: {
         pollAverage() {
             const total = _.reduce(this.listPolls, function(result, value) {
-                // console.log(result, value, key)
                 return result + value.score;
             }, 0);
+            const len = _.isNil(this.listPolls.length) || this.listPolls.length === 0 ? 1 : this.listPolls.length
 
-            return Math.round(total/this.listPolls.length)
+            return Math.round(total/len)
         },
     }
 }

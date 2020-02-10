@@ -1,30 +1,28 @@
 <template>
-  <div class="polls">
-    <section class="pollapp">
+  <div class="polls container is-widescreen">
+    <!-- <addPoll /> -->
+    <!-- <section class="pollapp">
       <header class="header">
         <h1>Quiz Scores</h1>
-    
-        <div class="new-poll">
-        
-        </div>
+
       </header>
       <section class="main" v-show="polls.length" v-cloak>
         <div class="poll-list">
-          <poll v-for="poll in filteredPolls" :poll="poll"/>
+          <poll v-for="poll in filteredPolls" :poll="poll" :key="poll._id"/>
         </div>
       </section>
       <footer class="footer" v-show="polls.length" v-cloak>
     
       </footer>
-    </section>
+    </section> -->
   </div>
-          
 </template>
 <style scoped>
 </style>
 
 <script>
 import _ from "lodash";
+import vueAddPoll from "@/views/AddPoll.vue"
 import vuePoll from "@/views/Poll.vue"
 import PollsMixin from "@/mixins/PollsMixin";
 import UsersMixin from "@/mixins/UsersMixin";
@@ -44,13 +42,13 @@ export default {
   name: "Polls",
   mixins: [PollsMixin, UsersMixin],
   components: {
-    "poll": vuePoll
+    addPoll: vueAddPoll,
+    poll: vuePoll
   },
   mounted() {
     // handle routing
     const onHashChange = () => {
       let visibility = window.location.hash.replace(/#\/?/, "");
-      console.log(visibility);
       if (filters[visibility]) {
         this.visibility = visibility;
       } else {
@@ -60,11 +58,6 @@ export default {
     };
     window.addEventListener("hashchange", onHashChange);
     onHashChange();
-  },
-  data() {
-    return {
-
-    };  
   },
   computed: {
     users() {

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <b-navbar fixed-top="true" shadow="true" spaced="true">
+    <b-navbar :fixed-top="true" :shadow="true" :spaced="true">
       <template slot="brand">
           <b-navbar-item tag="router-link" :to="{ path: '/' }">
               <img

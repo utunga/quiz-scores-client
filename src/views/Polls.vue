@@ -1,5 +1,6 @@
 <template>
   <div class="polls container is-widescreen">
+    <chart />
     <!-- <addPoll /> -->
     <!-- <section class="pollapp">
       <header class="header">
@@ -23,6 +24,7 @@
 <script>
 import _ from "lodash";
 import vueAddPoll from "@/views/AddPoll.vue"
+import vueChart from "@/components/Chart.vue"
 import vuePoll from "@/views/Poll.vue"
 import PollsMixin from "@/mixins/PollsMixin";
 import UsersMixin from "@/mixins/UsersMixin";
@@ -43,6 +45,7 @@ export default {
   mixins: [PollsMixin, UsersMixin],
   components: {
     addPoll: vueAddPoll,
+    chart: vueChart,
     poll: vuePoll
   },
   mounted() {

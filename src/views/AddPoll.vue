@@ -37,7 +37,6 @@
                               ref="scored"
                               placeholder="Select a score"
                               size="is-large"
-                              v-model="selectedDate"
                             >
                               <option
                                   v-for="option in scoreOptions"
@@ -94,7 +93,6 @@ export default {
       date: new Date(),
       isModalOpen: false,
       usersGroup: [],
-      selectedDate: [],
       errors: defaultErrors,
       scoreOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     };
@@ -117,10 +115,10 @@ export default {
     checkErrors() {
       this.errors.users = this.usersGroup.length === 0 ? true : false;
       this.errors.score = this.$refs.scored.selected === null ? true : false;
-      this.errors.date = this.selectedDate === null ? true : false;
+      this.errors.date = this.date === null ? true : false;
 
       if (!this.errors.date) {
-        const curr = new Date(this.selectedDate);
+        const curr = new Date(this.date);
 
         const exists = _.findIndex(this.polls(), function(value) {
           const d = new Date(value.date);
@@ -139,12 +137,10 @@ export default {
       this.errors.score = false;
       this.errors.date = false;
 
-      this.selectedDate = [];
-
       this.date = new Date();
     },
     save() {
-      const date = this.selectedDate.toISOString();
+      const date = this.date.toISOString();
       const score = this.$refs.scored.selected;
       const out_of = 10;
       const present = this.usersGroup;
@@ -158,6 +154,8 @@ export default {
         this.$buefy.toast.open({
           message: "Poll has been recorded"
         });
+
+        this.reset();
       });
     }
   }

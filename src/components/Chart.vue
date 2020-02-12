@@ -28,7 +28,8 @@ export default {
     listPolls() {
       const labels = [];
       const datasets = [];
-      _.forEach(this.listPolls, function(value) {
+      const polls = _.sortBy(this.listPolls, ['date']);
+      _.forEach(polls, function(value) {
         const label = Moment(value.date).format("D MMM YYYY");
         labels.push(label);
 

@@ -17,7 +17,14 @@
           </b-navbar-item>
 
           <b-navbar-item tag="div">
-            <AddPoll />
+            <div class="field has-addons">
+              <p class="control">
+                <AddPoll />
+              </p>
+              <p class="control">
+                <ManageUsers />
+              </p>
+            </div>
           </b-navbar-item>
       </template>
     </b-navbar>
@@ -29,9 +36,10 @@
 <script>
 import AverageScore from '@/components/AverageScore'
 import AddPoll from '@/views/AddPoll'
+import ManageUsers from '@/views/ManageUsers';
 export default {
   name: "app",
-  components: { AverageScore, AddPoll }
+  components: { AverageScore, AddPoll, ManageUsers }
 };
 </script>
 

@@ -23,7 +23,7 @@
                     aria-controls="contentIdForA11y1"
                     icon-left="user-plus"
                     style="margin-bottom: 12px;"
-                    @click="collapse">Add user</b-button>
+                    @click="collapse">Add</b-button>
             </div>
         </b-field>
         <b-collapse

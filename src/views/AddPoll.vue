@@ -3,7 +3,7 @@
         <button class="button is-primary is-medium"
             @click="isModalOpen = true"
         >
-            Add new poll
+            Add quiz
         </button>
         <b-modal
           :active.sync="isModalOpen"
@@ -12,7 +12,7 @@
           <form action="" @submit="checkForm" novalidate>
             <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-head-title">New poll</p>
+                    <p class="modal-card-head-title">New quiz</p>
                 </header>
                 <div class="modal-card-body">
                     <div class="content">
@@ -20,10 +20,10 @@
                           label="Select a date"
                           custom-class="is-small"
                           :type="{ 'is-danger': errors.date }"
-                          :message="{ 'A poll has already been recorded for this date': errors.date }">
+                          :message="{ 'A quiz has already been recorded for this date': errors.date }">
                             <b-datepicker
                                 ref="date"
-                                placeholder="Choose poll date"
+                                placeholder="Choose quiz date"
                                 icon="calendar"
                                 v-model="date">
                             </b-datepicker>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                  <footer class="modal-card-foot">
-                    <input type="submit" value="save poll" class="button is-primary" />
+                    <input type="submit" value="save" class="button is-primary" />
                 </footer>
             </div>
           </form>

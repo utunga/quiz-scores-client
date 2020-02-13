@@ -3,7 +3,7 @@
         <button class="button is-primary is-medium"
             @click="isModalOpen = true"
         >
-            Add new poll
+            Add quiz
         </button>
         <b-modal
           :active.sync="isModalOpen"
@@ -12,7 +12,7 @@
           <form action="" @submit="checkForm" novalidate>
             <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-head-title">New poll</p>
+                    <p class="modal-card-head-title">New quiz</p>
                 </header>
                 <div class="modal-card-body">
                     <div class="content">
@@ -20,10 +20,10 @@
                           label="Select a date"
                           custom-class="is-small"
                           :type="{ 'is-danger': errors.date }"
-                          :message="{ 'A poll has already been recorded for this date': errors.date }">
+                          :message="{ 'A quiz has already been recorded for this date': errors.date }">
                             <b-datepicker
                                 ref="date"
-                                placeholder="Choose poll date"
+                                placeholder="Choose quiz date"
                                 icon="calendar"
                                 v-model="date">
                             </b-datepicker>
@@ -47,59 +47,15 @@
                           </b-select>
                         </b-field>
 
-                        <b-field
-                          label="Players"
-                          custom-class="is-small"
-                          :type="{ 'is-danger': errors.users }"
-                          :message="{ 'At least 1 player is required': errors.users }"
-                        >
-                            <div class="field is-grouped is-flex" style="flex-wrap: wrap;">
-                                <b-checkbox-button 
-                                    v-for="user in sortedUsers()"
-                                    v-model="usersGroup"
-                                    :native-value="user._id"
-                                    :key="user._id"
-                                    class="is-rounded"
-                                    style="margin-bottom: 12px;">
-                                    <span>{{ user.name }}</span>
-                                </b-checkbox-button>
-                                <b-button
-                                  class="button is-primary"
-                                  slot="trigger"
-                                  aria-controls="contentIdForA11y1"
-                                  icon-left="user-plus"
-                                  style="margin-bottom: 12px;"
-                                  @click="collapse">Add user</b-button>
-                            </div>
-                        </b-field>
-                        <b-collapse
-                          :open="isPlayerPanelOpen"
-                          aria-id="contentIdForA11y1"
-                          class="is-full-width">
-                          <b-field
-                            :type="{'is-danger' : errors.newUser}"
-                            :message="{ 'Player with the same name already exists': errors.newUser }">
-                            <div class="field is-flex has-addons">
-                              <b-input
-                                type="text"
-                                v-model="newPlayerName"
-                                placeholder="Player name"
-                                class="is-expanded"
-                              ></b-input>
-                              <p class="control">
-                                <b-button
-                                  class="button is-primary"
-                                  slot="trigger"
-                                  aria-controls="contentIdForA11y1"
-                                  @click="addUser">Add</b-button>
-                              </p>
-                            </div>
-                          </b-field>
-                        </b-collapse>
+                        <AddUser
+                          @usersGroupUpdated="updatedUsers"
+                          :users="sortedUsers()"
+                          :has-error="errors.users"
+                        />
                     </div>
                 </div>
                  <footer class="modal-card-foot">
-                    <input type="submit" value="save poll" class="button is-primary" />
+                    <input type="submit" value="save" class="button is-primary" />
                 </footer>
             </div>
           </form>
@@ -110,26 +66,25 @@
 <script>
 import UsersMixin from "@/mixins/UsersMixin";
 import PollsMixin from "@/mixins/PollsMixin";
+import AddUser from "@/components/AddUser";
 import _ from "lodash";
 
 const defaultErrors = {
   score: false,
   users: false,
-  date: false,
-  newUser: false
+  date: false
 };
 
 export default {
   mixins: [PollsMixin, UsersMixin],
+  components: { AddUser },
   data() {
     return {
       date: new Date(),
       isModalOpen: false,
-      isPlayerPanelOpen: false,
       usersGroup: [],
       errors: defaultErrors,
-      scoreOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      newPlayerName: ""
+      scoreOptions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     };
   },
   methods: {
@@ -174,7 +129,6 @@ export default {
       this.errors.users = false;
       this.errors.score = false;
       this.errors.date = false;
-      this.errors.newUser = false;
 
       this.date = new Date();
     },
@@ -197,29 +151,8 @@ export default {
         this.reset();
       });
     },
-    collapse(e) {
-      e.preventDefault();
-      this.isPlayerPanelOpen = !this.isPlayerPanelOpen;
-    },
-    addUser(e) {
-      e.preventDefault();
-
-      const name = this.newPlayerName;
-
-      const existingPlayer = _.findIndex(this.users(), function(value) {
-        return value.name.trim().toLowerCase() === name.trim().toLowerCase();
-      });
-
-      if (existingPlayer === -1) {
-        this.createUser({
-          name
-        }).then(() => {
-          this.isPlayerPanelOpen = !this.isPlayerPanelOpen;
-          this.newPlayerName = "";
-        });
-      } else {
-        this.errors.newUser = true;
-      }
+    updatedUsers(users) {
+      this.usersGroup = users;
     }
   }
 };

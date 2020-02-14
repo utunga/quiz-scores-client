@@ -15,7 +15,8 @@ export default {
   methods: {
     ...mapActions("users", {
       findUsers: "find",
-      createUser: "create"
+      createUser: "create",
+      deleteUser: "remove"
     })
   },
   async created() {

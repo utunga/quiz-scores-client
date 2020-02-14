@@ -30,6 +30,7 @@
     "babel-jest": "^23.0.1",
     "buefy": "^0.8.10",
     "chart.js": "^2.9.3",
+    "chroma-js": "^2.1.0",
     "easy-circular-progress": "^1.0.4",
     "feathers-vuex": "^1.4.8",
     "lodash": "^4.17.15",

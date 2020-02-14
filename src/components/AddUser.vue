@@ -7,16 +7,12 @@
             :message="{ 'At least 1 player is required': hasError }"
         >
             <div class="field is-grouped is-flex" style="flex-wrap: wrap;">
-                <b-checkbox-button 
-                    v-for="user in users"
-                    v-model="selectedUsers"
-                    :native-value="user._id"
-                    :key="user._id"
-                    class="is-rounded"
-                    style="margin-bottom: 12px;"
-                    @input="clickUser">
-                    <span>{{ user.name }}</span>
-                </b-checkbox-button>
+                <UserButton
+                  :users="users"
+                  :model="selectedUsers"
+                  :clickFunction="clickUser"
+                  displayType="checkbox" />
+
                 <b-button
                     class="button is-primary"
                     slot="trigger"
@@ -33,40 +29,39 @@
     </div>
 </template>
 <script>
-import _ from "lodash";
-
-import UserField from "@/components/UserField";
-import UsersMixin from "@/mixins/UsersMixin";
+import UserButton from '@/components/UserButton'
+import UserField from '@/components/UserField'
+import UsersMixin from '@/mixins/UsersMixin'
 
 const defaultErrors = {
-  users: false,
-  newUser: false
-};
+    users: false,
+    newUser: false,
+}
 export default {
-  name: "AddUser",
-  components: { UserField },
-  mixins: [UsersMixin],
-  props: {
-    hasError: Boolean,
-    users: Array,
-    usersGroup: Array
-  },
-  data: () => ({
-    errors: defaultErrors,
-    isPlayerPanelOpen: false,
-    selectedUsers: []
-  }),
-  methods: {
-    clickUser() {
-      this.$emit("usersGroupUpdated", this.selectedUsers);
+    name: 'AddUser',
+    components: { UserButton, UserField },
+    mixins: [UsersMixin],
+    props: {
+        hasError: Boolean,
+        users: Array,
+        usersGroup: Array,
     },
-    collapse(e) {
-      e.preventDefault();
-      this.isPlayerPanelOpen = !this.isPlayerPanelOpen;
+    data: () => ({
+        errors: defaultErrors,
+        isPlayerPanelOpen: false,
+        selectedUsers: [],
+    }),
+    methods: {
+        clickUser() {
+            this.$emit('usersGroupUpdated', this.selectedUsers)
+        },
+        collapse(e) {
+            e.preventDefault()
+            this.isPlayerPanelOpen = !this.isPlayerPanelOpen
+        },
+        panelOpen(open) {
+            this.isPlayerPanelOpen = open
+        },
     },
-    panelOpen(open) {
-      this.isPlayerPanelOpen = open;
-    }
-  }
-};
+}
 </script>

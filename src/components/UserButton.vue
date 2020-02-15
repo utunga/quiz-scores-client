@@ -1,5 +1,8 @@
 <template>
-    <div v-if="displayType === 'button'" class="field is-grouped is-flex">
+    <div
+        v-if="displayType === 'button'"
+        class="field is-grouped is-flex"
+        style="flex-wrap: wrap;">
         <button
             v-for="user in users"
             :id="user._id"
@@ -7,7 +10,7 @@
             :key="user._id"
             class="button"
             style="margin-bottom: 12px;"
-            @click="clickFunction"
+            @click="onClick"
         >
             <span style="pointer-events: none;">{{ user.name }}</span>
             <span class="icon is-small" style="pointer-events: none;">
@@ -15,14 +18,17 @@
             </span>
         </button>
     </div>
-    <div v-else-if="displayType === 'checkbox'" class="field is-grouped is-flex">
+    <div
+        v-else-if="displayType === 'checkbox'"
+        class="field is-grouped is-flex"
+        style="flex-wrap: wrap;">
         <b-checkbox-button
             v-for="user in users"
-            :v-model="model"
+            v-model="selectedUsers"
             :native-value="user._id"
             :key="user._id"
             style="margin-bottom: 12px;"
-            @input="clickFunction">
+            @input="onCheck">
             <span>{{ user.name }}</span>
         </b-checkbox-button>
     </div>
@@ -33,7 +39,17 @@ export default {
         displayType: String,
         users: Array,
         model: Array,
-        clickFunction: Function,
+    },
+    data: () => ({
+        selectedUsers: [],
+    }),
+    methods: {
+        onCheck() {
+            this.$emit('usersUpdated', this.selectedUsers)
+        },
+        onClick(e) {
+            this.$emit('userClicked', e)
+        },
     },
 }
 </script>

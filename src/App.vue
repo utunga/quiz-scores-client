@@ -19,15 +19,28 @@
           <b-navbar-item tag="div">
             <div class="field has-addons">
               <p class="control">
-                <AddPoll />
+                  <button class="button is-primary is-medium"
+                        @click="pollModalOpen"
+                  >
+                  Add quiz
+                  </button>
               </p>
               <p class="control">
-                <ManageUsers />
+                  <b-button
+                    class="is-medium"
+                    @click="userModalOpen"
+                  >
+                    Manage players
+                  </b-button>
+                
               </p>
             </div>
           </b-navbar-item>
       </template>
     </b-navbar>
+
+    <AddPoll :isModalOpen="isPollModalOpen" @pollModalClose="pollModalClose" />
+    <ManageUsers :isModalOpen="isUserModalOpen" @userModalClose="userModalClose" />
 
     <router-view />
     <slot></slot>
@@ -36,40 +49,85 @@
 <script>
 import AverageScore from '@/components/AverageScore'
 import AddPoll from '@/views/AddPoll'
-import ManageUsers from '@/views/ManageUsers';
+import ManageUsers from '@/views/ManageUsers'
 export default {
-  name: "app",
-  components: { AverageScore, AddPoll, ManageUsers }
-};
+    name: 'app',
+    components: { AverageScore, AddPoll, ManageUsers },
+    data: () => ({
+        isPollModalOpen: false,
+        isUserModalOpen: false,
+    }),
+    methods: {
+        pollModalOpen() {
+            this.isPollModalOpen = true
+        },
+        pollModalClose() {
+            this.isPollModalOpen = false
+        },
+        userModalOpen() {
+            this.isUserModalOpen = true
+        },
+        userModalClose() {
+            this.isUserModalOpen = false
+        },
+    },
+}
 </script>
 
 <style lang="scss">
-  // Import Bulma's core
-  @import "~bulma/sass/utilities/_all";
+// Import Bulma's core
+@import '~bulma/sass/utilities/_all';
 
-  // Set your colors
-  $primary: #43a1c9;
-  $primary-invert: findColorInvert($primary);
+// Set your colors
+$primary: #43a1c9;
+$primary-invert: findColorInvert($primary);
 
-  // Setup $colors to use as bulma classes (e.g. 'is-twitter')
-  $colors: (
-      "white": ($white, $black),
-      "black": ($black, $white),
-      "light": ($light, $light-invert),
-      "dark": ($dark, $dark-invert),
-      "primary": ($primary, $primary-invert),
-      "info": ($info, $info-invert),
-      "success": ($success, $success-invert),
-      "warning": ($warning, $warning-invert),
-      "danger": ($danger, $danger-invert),
-  );
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    'white': (
+        $white,
+        $black,
+    ),
+    'black': (
+        $black,
+        $white,
+    ),
+    'light': (
+        $light,
+        $light-invert,
+    ),
+    'dark': (
+        $dark,
+        $dark-invert,
+    ),
+    'primary': (
+        $primary,
+        $primary-invert,
+    ),
+    'info': (
+        $info,
+        $info-invert,
+    ),
+    'success': (
+        $success,
+        $success-invert,
+    ),
+    'warning': (
+        $warning,
+        $warning-invert,
+    ),
+    'danger': (
+        $danger,
+        $danger-invert,
+    ),
+);
 
-  // Links
-  $link: $primary;
-  $link-invert: $primary-invert;
-  $link-focus-border: $primary;
+// Links
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
 
-  // Import Bulma and Buefy styles
-  @import "~bulma";
-  @import "~buefy/src/scss/buefy";
+// Import Bulma and Buefy styles
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 </style>

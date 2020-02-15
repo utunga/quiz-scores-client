@@ -6,12 +6,12 @@
             :type="{ 'is-danger': hasError }"
             :message="{ 'At least 1 player is required': hasError }"
         >
-            <div class="field is-grouped is-flex" style="flex-wrap: wrap;">
+            <div>
                 <UserButton
                   :users="users"
-                  :model="selectedUsers"
-                  :clickFunction="clickUser"
-                  displayType="checkbox" />
+                  displayType="checkbox"
+                  @usersUpdated="updateUsers"
+                />
 
                 <b-button
                     class="button is-primary"
@@ -49,11 +49,10 @@ export default {
     data: () => ({
         errors: defaultErrors,
         isPlayerPanelOpen: false,
-        selectedUsers: [],
     }),
     methods: {
-        clickUser() {
-            this.$emit('usersGroupUpdated', this.selectedUsers)
+        updateUsers(selected) {
+            this.$emit('usersGroupUpdated', selected)
         },
         collapse(e) {
             e.preventDefault()

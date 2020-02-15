@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <b-button
-      class="is-medium"
-      @click="isModalOpen = true"
-    >
-      Manage players
-    </b-button>
     <b-modal
-      :active.sync="isModalOpen"
-      :width="640">
+      :active="isModalOpen"
+      :width="640"
+      :has-modal-card="true"
+      @close="closeModal"
+    >
         <div class="card">
             <header class="card-header">
                 <p class="card-header-title">Manage Players</p>
@@ -19,7 +15,7 @@
                 style="flex-wrap: wrap; align-items: flex-start;">
                 <UserButton
                   :users="sortedUsers()"
-                  :clickFunction="confirmDelete"
+                  @userClicked="confirmDelete"
                   displayType="button"
                   style="margin-right: 12px;"
                 />
@@ -41,7 +37,6 @@
             </div>
         </div>
     </b-modal>
-  </div>
 </template>
 
 <script>
@@ -53,8 +48,10 @@ import _ from 'lodash'
 export default {
     mixins: [UsersMixin],
     components: { UserButton, UserField },
+    props: {
+        isModalOpen: Boolean,
+    },
     data: () => ({
-        isModalOpen: false,
         isPanelOpen: false,
     }),
     methods: {
@@ -82,6 +79,10 @@ export default {
                     })
                 },
             })
+        },
+        closeModal() {
+            this.$emit('userModalClose')
+            return false
         },
     },
 }

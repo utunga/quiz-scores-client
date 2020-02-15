@@ -5,10 +5,15 @@
     :onCancel="reset"
     :has-modal-card="true"
     @close="closeModal">
-    <form action="" @submit="checkForm" novalidate>
+    <form
+        action=""
+        @submit="checkForm"
+        novalidate
+        style="max-height: 90vh; overflow: scroll;"
+    >
       <div class="modal-card">
           <header class="modal-card-head">
-              <p class="modal-card-head-title">New quiz</p>
+              <p class="modal-card-head-title"><b>New quiz</b></p>
           </header>
           <div class="modal-card-body">
               <div class="content">

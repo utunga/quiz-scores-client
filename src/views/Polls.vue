@@ -1,6 +1,6 @@
 <template>
   <div class="polls container is-widescreen">
-    <chart />
+    <line-chart :chart-data="dataCollection" :options="options" />
   </div>
 </template>
 <style scoped>
@@ -8,11 +8,15 @@
 
 <script>
 import _ from 'lodash'
+import Moment from 'moment'
+import chroma from 'chroma-js'
+
 import vueAddPoll from '@/views/AddPoll.vue'
 import vueChart from '@/components/Chart.vue'
 import vuePoll from '@/views/Poll.vue'
 import PollsMixin from '@/mixins/PollsMixin'
 import UsersMixin from '@/mixins/UsersMixin'
+
 // visibility filters
 let filters = {
     all(polls) {
@@ -30,9 +34,23 @@ export default {
     mixins: [PollsMixin, UsersMixin],
     components: {
         addPoll: vueAddPoll,
-        chart: vueChart,
+        LineChart: vueChart,
         poll: vuePoll,
     },
+    data: () => ({
+        dataCollection: {
+            labels: [],
+            datasets: [],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                display: false,
+            },
+            lineTension: 0,
+        },
+    }),
     mounted() {
         // handle routing
         const onHashChange = () => {
@@ -46,6 +64,54 @@ export default {
         }
         window.addEventListener('hashchange', onHashChange)
         onHashChange()
+    },
+    watch: {
+        listPolls() {
+            const labels = []
+            const datasets = []
+            const polls = _.sortBy(this.listPolls, ['date'])
+            _.forEach(polls, function(value) {
+                const label = Moment(value.date).format('D MMM YYYY')
+                labels.push(label)
+
+                datasets.push(value.score)
+            })
+            const maxScore = _.reduce(
+                polls,
+                function(result, value) {
+                    return Math.max(result, value.score)
+                },
+                0
+            )
+            const minScore = _.reduce(
+                polls,
+                function(result, value) {
+                    return Math.min(result, value.score)
+                },
+                0
+            )
+            this.dataCollection = {
+                datasets: [
+                    {
+                        label: 'score',
+                        backgroundColor: context => {
+                            const index = context.dataIndex
+                            const value = context.dataset.data[index]
+
+                            const colour = chroma
+                                .scale(['red', 'green'])
+                                .domain([minScore, maxScore])
+
+                            return colour(value).hex()
+                        },
+                        data: datasets,
+                        fill: false,
+                        lineTension: 0,
+                    },
+                ],
+                labels,
+            }
+        },
     },
     computed: {
         users() {

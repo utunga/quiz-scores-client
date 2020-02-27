@@ -53,7 +53,7 @@
 import _ from 'lodash'
 import UserButton from '@/components/UserButton'
 import UserField from '@/components/UserField'
-import UsersMixin from '@/mixins/UsersMixin'
+import UsersMixin from "@/mixins/UsersMixin"
 
 const defaultErrors = {
     users: false,

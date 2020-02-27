@@ -2,7 +2,7 @@
 import UsersMixin from '@/mixins/UsersMixin'
 import PollsMixin from '@/mixins/PollsMixin'
 
-import { Line } from 'vue-chartjs'
+import { Line, mixins } from 'vue-chartjs'
 
 import _ from 'lodash'
 import Moment from 'moment'
@@ -10,7 +10,7 @@ import chroma from 'chroma-js'
 
 export default {
     extends: Line,
-    mixins: [PollsMixin, UsersMixin],
+    mixins: [PollsMixin, UsersMixin, mixins.reactiveData],
     data: () => ({
         chartData: {
             labels: [],
@@ -70,13 +70,15 @@ export default {
             ]
             this.chartData.labels = labels
             this.options.scales = {
-                yAxes: [{
-                    ticks: {
-                        max: maxScore,
-                        min: minScore,
-                        stepSize: 1
+                yAxes: [
+                    {
+                        ticks: {
+                            max: maxScore,
+                            min: minScore,
+                            stepSize: 1,
+                        },
                     },
-                }]
+                ],
             }
 
             this.$data._chart.update()

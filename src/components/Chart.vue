@@ -23,6 +23,15 @@ export default {
                 display: false,
             },
             lineTension: 0,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        max: 10,
+                        min: 0,
+                        stepSize: 1
+                    }
+                }]
+            }
         },
     }),
     watch: {

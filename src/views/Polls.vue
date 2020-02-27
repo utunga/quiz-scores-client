@@ -111,6 +111,18 @@ export default {
                 ],
                 labels,
             }
+
+            this.options.scales = {
+                yAxes: [
+                    {
+                        ticks: {
+                            max: maxScore,
+                            min: minScore,
+                            stepSize: 1,
+                        },
+                    },
+                ],
+            }
         },
     },
     computed: {
